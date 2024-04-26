@@ -70,4 +70,18 @@ class ProfileController extends Controller
         return view('users.profile.following')->with('user', $user);
     }
 
+    public function passwordupdate(Request $request) {
+        $request->validate([
+            'new_password' => 'different:old_password|confirmed'
+        ]);
+        $user = $this->user->findOrFail(Auth::user()->id);
+        if(!password_verify($request->old_password, $user->password)){
+            return redirect()->back()->withErrors(['old_password' => 'The old password is incorrect.']);
+        }
+
+        $user->password = password_hash($request->new_password, PASSWORD_DEFAULT);
+
+        return redirect()->route('profile.show', Auth::user()->id);
+    }
+
 }

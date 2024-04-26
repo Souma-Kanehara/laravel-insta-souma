@@ -47,6 +47,11 @@
                     <strong>{{ $user->following->count() }}</strong> Following
                 </a>
             </div>
+            <div class="col-auto">
+                <a href="{{ route('favorite.show',$user->id) }}" class="text-decoration-none text-dark">
+                    <strong>{{ $user->favorites->count() }}</strong> Favorites
+                </a>
+            </div>
         </div>
         <p class="fw-bold">{{ $user->introduction }}</p>
     </div>

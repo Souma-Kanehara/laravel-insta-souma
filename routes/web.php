@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\FavoriteController;
 
 # Admin user controller
 use App\Http\Controllers\Admin\UsersController;
@@ -34,6 +35,7 @@ Route::group(['middleware' => 'auth'], function(){
     # Route for homepage
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/people', [HomeController::class, 'search'])->name('search');
+    Route::get('/people/all', [HomeController::class, 'showallusers'])->name('show');
     # Open create post form
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     # Save/Insert post details to database tables
@@ -54,6 +56,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/comment/{post_id}/store', [CommentController::class, 'store'])->name('comment.store');
     # Delete comment
     Route::delete('/comment/{id}/destroy',[CommentController::class, 'destroy'])->name('comment.destroy');
+    #### collaborative project
+    Route::delete('/comment/{id}/hide',[CommentController::class, 'hide'])->name('comment.hide'); // hide comment
 
 
 
@@ -64,9 +68,18 @@ Route::group(['middleware' => 'auth'], function(){
     # Update the user profile
     // Route::patch('/profile/{id}/update',[ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile//update',[ProfileController::class, 'update'])->name('profile.update');
+    #### collaborative project
+    Route::patch('/profile/passwordupdate',[ProfileController::class, 'passwordupdate'])->name('profile.passwordupdate');
     # followers
     Route::get('/profile/{id}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
     Route::get('/profile/{id}/following', [ProfileController::class, 'following'])->name('profile.following');
+    #### collaborative project
+    Route::get('/favorite/{id}/show', [FavoriteController::class, 'showFavorites'])->name('favorite.show');
+
+
+    #### collaborative project
+    Route::post('/favorite/{post_id}/store',[FavoriteController::class, 'store'])->name('favorite.store');
+    Route::delete('/favorite/{post_id}/destroy',[FavoriteController::class, 'destroy'])->name('favorite.destroy');
 
 
 

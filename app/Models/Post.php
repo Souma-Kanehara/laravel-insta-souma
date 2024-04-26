@@ -32,9 +32,18 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
-    # Check if the @ost been liked
+    # Check if the post been liked
     # Return TRUE if the AUTH user already liked the post
     public function isLiked() {
         return $this->likes()->where('user_id', Auth::user()->id)->exists();
     }
+
+    #### Collaborative project
+    public function favorite(){
+        return $this->hasMany(Favorite::class);
+    }
+    public function befavorite() {
+        return $this->favorite()->where('user_id', Auth::user()->id)->exists();
+    }
+
 }

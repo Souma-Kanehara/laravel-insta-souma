@@ -94,4 +94,10 @@ class HomeController extends Controller
          */
         // We need create search.blade.php
     }
+
+    public function showallusers()
+    {
+        $suggested_users = $this->getSuggestedUsers(); // ->paginate(3)
+        return view('users.profile.suggestionuser')->with('suggested_users', $suggested_users);
+    }
 }

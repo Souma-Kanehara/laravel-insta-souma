@@ -47,8 +47,9 @@ class PostController extends Controller
         # $request->category = [1, 5]
         foreach ($request->category as $category_id) {
             $category_post[] = ['category_id' => $category_id];
+            //  ['category_id' => $category_id] is title and value
 
-            #$request->category = [1, 5]
+            # $request->category = [1, 5]
             # $category_post[1, 5]
 
 

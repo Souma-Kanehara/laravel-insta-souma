@@ -42,4 +42,9 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
+    public function hide($id){
+        $this->comment->destroy($id);
+        return redirect()->back();
+    }
+
 }

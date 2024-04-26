@@ -59,4 +59,44 @@
             </form>
         </div>
     </div>
+    <div class="row justify-content-center mt-2">
+        <div class="col-8">
+            <form action="{{ route('profile.passwordupdate') }}" method="post" class="bg-white shadow rounded-3 p-5">
+                @csrf
+                @method('PATCH')
+                <h2 class="h3 mb-3 fw-light text-muted">Update Password</h2>
+
+                <div class="row mb-3">
+                    <label for="old-password" class="col-md-4 col-form-label text-md-end">Old password</label>
+                    <div class="col-md-6">
+                        <input id="old-password" type="password" name="old_password" class="form-control">
+                        @error('old_password')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="new-password" class="col-md-4 col-form-label text-md-end">New password</label>
+                    <div class="col-md-6">
+                        <input id="new-password" type="password" class="form-control" name="new_password">
+                        @error('new_password')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="new-password-confirmation" class="col-md-4 col-form-label text-md-end">Confirm password</label>
+                    <div class="col-md-6">
+                        <input id="new-password-confirmation" type="password" class="form-control" name="new_password_confirmation">
+                        @error('new_password_confirmation')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning px-5">Update</button>
+            </form>
+        </div>
+    </div>
 @endsection

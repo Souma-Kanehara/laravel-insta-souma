@@ -87,4 +87,10 @@ class User extends Authenticatable
         # First, in "$this->followers()" we retrieved the records, the from that records, search
         # searching  for the AUTH user from the follower_id column ( where('follower_id', Auth::user()->id) )
     }
+
+    ##### Collaborative Project
+    public function favorites(){
+        return $this->hasMany(Favorite::class, 'user_id');
+    }
+
 }

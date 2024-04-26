@@ -22,18 +22,19 @@
                     &nbsp;
                     <p class="d-inline fw-light">{{ $comment->body }}</p>
 
-                    <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                    <form action="{{ route('comment.destroy', $comment->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('DELETE')
-
                         <span class="text-uppercase text-muted xsmall">{{ date('M d, Y', strtotime($comment->created_at)) }}</span>
-
                         {{-- If the AUTH (the user that is authenticated and logged-in) User is the owner of the comment, then show the DELETE button --}}
                         @if (Auth::user()->id === $comment->user->id)
                             <button type="submit" class="border-0 bg-transparent text-danger p-0 xsmall">Delete</button>
                         @endif
-
                     </form>
+                        @if (Auth::user()->id === $post->user->id)
+                            <button type="submit" class="border-0 bg-transparent text-danger p-0 xsmall" data-bs-toggle="modal" data-bs-target="#hide-comment-{{ $comment->id }}">Hide</button>
+                        @endif
+                        @include('users.posts.contents.modals.status')
                 </li>
             @endforeach
 
